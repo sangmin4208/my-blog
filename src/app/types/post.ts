@@ -4,4 +4,5 @@ export interface Post {
   date: Date
   category: string
   path: string
+  featured: boolean
 }

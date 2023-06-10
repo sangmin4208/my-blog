@@ -12,3 +12,8 @@ export async function getAllPosts(): Promise<Post[]> {
     (a, b) => Number(new Date(b.date)) - Number(new Date(a.date))
   )
 }
+
+export async function getFeaturedPosts(): Promise<Post[]> {
+  const posts = await getAllPosts()
+  return posts.filter((post) => post.featured)
+}
