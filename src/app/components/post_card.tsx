@@ -10,20 +10,25 @@ export default function PostCard({
 }) {
   return (
     <Link href={`/posts/${path}`}>
-      <Image
-        src={`/images/posts/${path}.png`}
-        alt={title}
-        width={300}
-        height={200}
-      />
-      <div>
-        <time>{date.toString()}</time>
-        <h3>
-          <span>📝</span> {title}
-        </h3>
-        <p>{description}</p>
-        <p>{category}</p>
-      </div>
+      <article className="rounded-md overflow-hidden shadow-lg">
+        <Image
+          className="w-full"
+          src={`/images/posts/${path}.png`}
+          alt={title}
+          width={300}
+          height={200}
+        />
+        <div className="p-2 bg-slate-700">
+          <div className="flex items-baseline justify-between">
+            <h3 className="text-lg font-bold line-clamp-1">
+              <span>📝</span> {title}
+            </h3>
+            <time className="text-xs">{date.toString()}</time>
+          </div>
+          <p className="w-full line-clamp-1">{description}</p>
+          <p>{category}</p>
+        </div>
+      </article>
     </Link>
   )
 }
