@@ -6,3 +6,7 @@ export interface Post {
   path: string
   featured: boolean
 }
+
+export interface PostData extends Post {
+  content: string
+}

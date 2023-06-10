@@ -2,7 +2,7 @@ import { getFeaturedPosts } from "@/services/posts"
 import React from "react"
 import PostsGrid from "./posts_grid"
 
-export default async function FeaturedPosts() {
+const FeaturedPosts = async () => {
   const posts = await getFeaturedPosts()
   return (
     <section className="my-4">
@@ -13,3 +13,5 @@ export default async function FeaturedPosts() {
     </section>
   )
 }
+
+export default FeaturedPosts

@@ -3,9 +3,8 @@ import React from "react"
 import MultiCarousel from "./multi-carousel"
 import PostCard from "./post_card"
 
-export default async function CarouselPosts() {
+const CarouselPosts = async () => {
   const posts = await getNonFeaturedPosts()
-
   return (
     <section className="my-4">
       <h2 className="font-bold text-xl">
@@ -19,3 +18,5 @@ export default async function CarouselPosts() {
     </section>
   )
 }
+
+export default CarouselPosts
