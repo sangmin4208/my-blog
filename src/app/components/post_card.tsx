@@ -18,7 +18,7 @@ export default function PostCard({
           width={300}
           height={200}
         />
-        <div className="p-2 bg-slate-700">
+        <div className="p-2 dark:bg-slate-700">
           <div className="flex items-baseline justify-between">
             <h3 className="text-lg font-bold line-clamp-1">
               <span>📝</span> {title}
