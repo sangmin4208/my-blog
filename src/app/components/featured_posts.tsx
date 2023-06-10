@@ -5,7 +5,7 @@ import PostsGrid from "./posts_grid"
 export default async function FeaturedPosts() {
   const posts = await getFeaturedPosts()
   return (
-    <section>
+    <section className="my-4">
       <h2 className="font-bold text-xl">
         <span>✍️</span> Featured Posts
       </h2>
