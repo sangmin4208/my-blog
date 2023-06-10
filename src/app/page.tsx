@@ -1,9 +1,12 @@
+import FeaturedPosts from "./components/featured_posts"
 import Hero from "./components/hero"
 
 export default function Home() {
   return (
-    <section className="flex justify-center">
+    <div className="flex flex-col gap-4">
       <Hero />
-    </section>
+      {/* @ts-expect-error Server Component */}
+      <FeaturedPosts />
+    </div>
   )
 }
