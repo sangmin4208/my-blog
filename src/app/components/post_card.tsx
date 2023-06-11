@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react"
 import { Post } from "../types/post"
 import Link from "next/link"
@@ -8,10 +10,29 @@ export default function PostCard({
 }: {
   post: Post
 }) {
+  // const [mouseX, setMouseX] = React.useState(0)
+  const [startX, setStartX] = React.useState(0)
+  const [endX, setEndX] = React.useState(0)
   return (
-    <Link href={`/posts/${path}`}>
-      <article className="rounded-md overflow-hidden shadow-md hover:shadow-lg duration-300">
+    <Link
+      href={`/posts/${path}`}
+      draggable={"false"}
+      onClick={(e) => {
+        const diff = endX - startX
+        if (Math.abs(diff) > 10) {
+          e.preventDefault()
+        }
+      }}
+      onMouseDown={(e) => {
+        setStartX(e.clientX)
+      }}
+      onMouseUp={(e) => {
+        setEndX(e.clientX)
+      }}
+    >
+      <article className="overflow-hidden duration-300 rounded-md shadow-md hover:shadow-lg">
         <Image
+          draggable={"false"}
           className="w-full"
           src={`/images/posts/${path}.png`}
           alt={title}
