@@ -1,3 +1,4 @@
+import MarkdownViewer from "@/app/components/markdown-viewer"
 import { getPostBySlug } from "@/services/posts"
 import { notFound } from "next/navigation"
 import React from "react"
@@ -18,7 +19,7 @@ export default async function Page({ params: { slug } }: Params) {
       <h1>
         {post.title} ({post.path})
       </h1>
-      <pre>{post.content}</pre>
+      <MarkdownViewer>{post.content}</MarkdownViewer>
     </div>
   )
 }
