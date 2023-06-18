@@ -25,16 +25,20 @@ export async function getNonFeaturedPosts(): Promise<Post[]> {
 
 export async function getPostBySlug(slug: string): Promise<PostData> {
   const posts = await getAllPosts()
-  const post = posts.find((post) => post.path === slug)
-
+  const postIndex = posts.findIndex((post) => post.path === slug)
+  const post = posts[postIndex]
   const filePath = path.join(process.cwd(), "data", "posts", `${slug}.md`)
   const content = await readFile(filePath, "utf-8")
   if (!post) {
     throw new Error(`No post found with slug: ${slug}`)
   }
+  const nextPost = postIndex === posts.length - 1 ? null : posts[postIndex + 1]
+  const previousPost = postIndex === 0 ? null : posts[postIndex - 1]
 
   return {
     ...post,
     content,
+    next: nextPost,
+    previous: previousPost,
   }
 }

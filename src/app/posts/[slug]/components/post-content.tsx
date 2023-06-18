@@ -17,7 +17,7 @@ export default function PostContent({
         </div>
         <p className="text-sm font-bold">{description}</p>
       </section>
-      <main className="mt-4">
+      <main className="mt-8 mb-32">
         <MarkdownViewer>{content}</MarkdownViewer>
       </main>
     </>
