@@ -4,6 +4,7 @@ import { Open_Sans } from "next/font/google"
 
 const open_sans = Open_Sans({ subsets: ["latin"] })
 import "./globals.css"
+import { Toaster } from "./components/ui/toaster"
 
 export const metadata = {
   title: "Create Next App",
@@ -22,6 +23,7 @@ export default function RootLayout({
           open_sans.className + " flex flex-col mx-auto max-w-6xl container"
         }
       >
+        <Toaster />
         <Header />
         <main className="grow">{children}</main>
         <Footer />

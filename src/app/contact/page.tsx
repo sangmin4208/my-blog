@@ -1,7 +1,6 @@
-import React from 'react'
+import React from "react"
+import ContactForm from "./components/contact-form"
 
 export default function Page() {
-  return (
-    <div>Contact</div>
-  )
+  return <ContactForm />
 }
