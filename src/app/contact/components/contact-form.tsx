@@ -11,6 +11,7 @@ import {
 } from "@/app/components/ui/form"
 import { Input } from "@/app/components/ui/input"
 import { Button } from "@/app/components/ui/button"
+import { Textarea } from "@/app/components/ui/textarea"
 
 export default function ContactForm() {
   const { form, onSubmit } = useContactForm()
@@ -43,7 +44,7 @@ export default function ContactForm() {
             <FormItem>
               <FormLabel>메시지</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Textarea placeholder="shadcn" {...field} />
               </FormControl>
               <FormDescription>보내실 메시지를 입력해주세요.</FormDescription>
               <FormMessage />
