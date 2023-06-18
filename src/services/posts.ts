@@ -3,16 +3,25 @@ import "server-only"
 import { Post, PostData } from "@/app/types/post"
 import { readFile } from "fs/promises"
 import path from "path"
+import { cache } from "react"
 
-export async function getAllPosts(): Promise<Post[]> {
+// export async function getAllPosts(): Promise<Post[]> {
+//   const filePath = path.join(process.cwd(), "data", "posts.json")
+//   const json = await readFile(filePath, "utf-8")
+//   const posts = JSON.parse(json) as Post[]
+//   return posts.sort(
+//     (a, b) => Number(new Date(b.date)) - Number(new Date(a.date))
+//   )
+// }
+
+export const getAllPosts = cache(async (): Promise<Post[]> => {
   const filePath = path.join(process.cwd(), "data", "posts.json")
   const json = await readFile(filePath, "utf-8")
   const posts = JSON.parse(json) as Post[]
   return posts.sort(
     (a, b) => Number(new Date(b.date)) - Number(new Date(a.date))
   )
-}
-
+})
 export async function getFeaturedPosts(): Promise<Post[]> {
   const posts = await getAllPosts()
   return posts.filter((post) => post.featured)

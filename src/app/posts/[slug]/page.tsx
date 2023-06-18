@@ -1,4 +1,4 @@
-import { getPostBySlug } from "@/services/posts"
+import { getAllPosts, getPostBySlug } from "@/services/posts"
 import { notFound } from "next/navigation"
 import React from "react"
 import PostContent from "./components/post-content"
@@ -33,4 +33,13 @@ export default async function Page({ params: { slug } }: Params) {
       <PostNavigation post={post} />
     </article>
   )
+}
+
+export async function generateStaticParams() {
+  const posts = await getAllPosts()
+  return posts.map((post) => ({
+    params: {
+      slug: post.path,
+    },
+  }))
 }
