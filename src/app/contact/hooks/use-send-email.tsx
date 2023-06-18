@@ -1,6 +1,6 @@
 import { useToast } from "@/app/hooks/use-toast"
 import { ContactForm } from "@/app/types/contact-form"
-import { sendContactEmail } from "@/services/contact"
+import { requestSendContractEmail } from "@/services/contact"
 import useSWRMutation from "swr/mutation"
 
 export const useSendEmail = () => {
@@ -8,7 +8,7 @@ export const useSendEmail = () => {
     trigger,
     isMutating: isSending,
     error,
-  } = useSWRMutation("/api/contact", sendContactEmail)
+  } = useSWRMutation("/api/contact", requestSendContractEmail)
   const { toast } = useToast()
 
   const send = async (values: ContactForm, onSuccess: () => void) => {

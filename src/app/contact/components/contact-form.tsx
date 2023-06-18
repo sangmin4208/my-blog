@@ -14,12 +14,12 @@ import { Button } from "@/app/components/ui/button"
 import { Textarea } from "@/app/components/ui/textarea"
 
 export default function ContactForm() {
-  const { form, onSubmit } = useContactForm()
+  const { form, onSubmit, isSending } = useContactForm()
   return (
     <FormProvider {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-4"
+        className="flex flex-col gap-4 "
       >
         <FormField
           control={form.control}
@@ -28,7 +28,7 @@ export default function ContactForm() {
             <FormItem>
               <FormLabel>이메일</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="이메일 주소를 입력해주세요." {...field} />
               </FormControl>
               <FormDescription>
                 보내실 이메일 주소를 입력해주세요.
@@ -44,14 +44,16 @@ export default function ContactForm() {
             <FormItem>
               <FormLabel>메시지</FormLabel>
               <FormControl>
-                <Textarea placeholder="shadcn" {...field} />
+                <Textarea placeholder="10글자 이상 입력해주세요" {...field} />
               </FormControl>
               <FormDescription>보내실 메시지를 입력해주세요.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button disabled={isSending} type="submit">
+          {isSending ? "전송중..." : "전송"}
+        </Button>
       </form>
     </FormProvider>
   )

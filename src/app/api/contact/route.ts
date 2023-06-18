@@ -1,4 +1,5 @@
 import { ContactForm, contactFormSchema } from "@/app/types/contact-form"
+import { sendEmail } from "@/services/email"
 import { NextResponse } from "next/server"
 
 export async function POST(req: Request) {
@@ -13,7 +14,22 @@ export async function POST(req: Request) {
   const { email, message } = body as ContactForm
 
   // fake delay
-  await new Promise((resolve) => setTimeout(resolve, 1000))
+  try {
+    await sendEmail({ email, message })
+  } catch (error) {
+    console.log(error)
+    return new Response(
+      JSON.stringify({
+        message: "Failed to send email.",
+      }),
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+  }
 
   return new Response(
     JSON.stringify({

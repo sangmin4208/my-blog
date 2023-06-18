@@ -11,15 +11,17 @@ export const useContactForm = () => {
       message: "",
     },
   })
-  const { send } = useSendEmail()
+  const { send, isSending } = useSendEmail()
 
   function onSubmit(values: ContactForm) {
+    if (isSending) return
     console.log(values)
     send(values, form.reset)
   }
 
   return {
     form,
+    isSending,
     onSubmit,
   }
 }

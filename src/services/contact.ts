@@ -1,6 +1,6 @@
 import { ContactForm } from "@/app/types/contact-form"
 
-export async function sendContactEmail(
+export async function requestSendContractEmail(
   url: string,
   { arg }: { arg: ContactForm }
 ) {
