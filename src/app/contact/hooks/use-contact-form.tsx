@@ -1,24 +1,21 @@
-import { useToast } from "@/app/hooks/use-toast"
-import { ContactForm, contactFormResolver } from "@/app/types/contact-form"
+import { ContactForm, contactFormSchema } from "@/app/types/contact-form"
 import { useForm } from "react-hook-form"
+import { useSendEmail } from "./use-send-email"
+import { zodResolver } from "@hookform/resolvers/zod"
 
 export const useContactForm = () => {
   const form = useForm<ContactForm>({
-    resolver: contactFormResolver,
+    resolver: zodResolver(contactFormSchema),
     defaultValues: {
       email: "",
       message: "",
     },
   })
-  const { toast } = useToast()
+  const { send } = useSendEmail()
 
   function onSubmit(values: ContactForm) {
     console.log(values)
-    toast({
-      title: "성공적으로 전송되었습니다.",
-      description: "빠른 시일 내에 답변드리겠습니다.",
-    })
-    form.reset()
+    send(values, form.reset)
   }
 
   return {
