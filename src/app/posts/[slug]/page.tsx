@@ -10,6 +10,17 @@ interface Params {
   }
 }
 
+export async function generateMetadata({ params: { slug } }: Params) {
+  const post = await getPostBySlug(slug)
+  if (!post) {
+    notFound()
+  }
+  return {
+    title: post.title,
+    description: post.description,
+  }
+}
+
 export default async function Page({ params: { slug } }: Params) {
   const post = await getPostBySlug(slug)
   if (!post) {
