@@ -1,10 +1,23 @@
-import { getPostBySlug } from "@/services/posts"
+import { getAllPosts, getPostBySlug } from "@/services/posts"
 import { notFound } from "next/navigation"
 import React from "react"
-
+import PostContent from "./components/post-content"
+import PostCoverImage from "./components/post-cover-image"
+import PostNavigation from "./components/post-navigation"
 interface Params {
   params: {
     slug: string
+  }
+}
+
+export async function generateMetadata({ params: { slug } }: Params) {
+  const post = await getPostBySlug(slug)
+  if (!post) {
+    notFound()
+  }
+  return {
+    title: post.title,
+    description: post.description,
   }
 }
 
@@ -14,11 +27,19 @@ export default async function Page({ params: { slug } }: Params) {
     notFound()
   }
   return (
-    <div>
-      <h1>
-        {post.title} ({post.path})
-      </h1>
-      <pre>{post.content}</pre>
-    </div>
+    <article className="m-4 mb-48">
+      <PostCoverImage post={post} />
+      <PostContent post={post} />
+      <PostNavigation post={post} />
+    </article>
   )
+}
+
+export async function generateStaticParams() {
+  const posts = await getAllPosts()
+  return posts.map((post) => ({
+    params: {
+      slug: post.path,
+    },
+  }))
 }
