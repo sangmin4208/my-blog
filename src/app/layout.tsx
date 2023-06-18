@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="system">
       <body
         className={
           open_sans.className + " flex flex-col mx-auto max-w-6xl container"
